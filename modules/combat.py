@@ -3,6 +3,7 @@ from util.logger import Logger
 from util.utils import Region, Utils
 from scipy import spatial
 from threading import Thread
+from modules.drop import DropManager as DM
 
 class CombatModule(object):
 
@@ -165,7 +166,9 @@ class CombatModule(object):
                 continue
             if Utils.find("menu/item_found"):
                 if boss:
-                    
+                    id = DM.find_droped()
+                    print(id)
+
                 Utils.touch_randomly(Region(661, 840, 598, 203))
                 Utils.script_sleep(1)
                 continue
