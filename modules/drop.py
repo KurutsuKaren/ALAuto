@@ -9,6 +9,11 @@ f.write(json)
 f.close()
 '''
 from util.utils import Utils
+import requests as r
+from dotenv import load_dotenv
+load_dotenv()
+import os
+import json
 
 class DropManager(object):
 
@@ -21,6 +26,19 @@ class DropManager(object):
             if Utils.find("ships/"+str(p)):
                 DropManager.drops.append(p)
                 print(DropManager.drops)
+                DropManager.send_drop(p)
                 return p
 
         return -1
+
+    @staticmethod
+    def send_drop(p):
+        password = os.getenv("SEND_PASS")
+        data = {
+            'map' : '34',
+            'ship' : str(p),
+            'PASS' : password
+        }
+        response = r.get('https://azurlanekurutsukaren.herokuapp.com/savedrop', json=data)
+        '''response = r.post('http://localhost:3000/savedrop', json=data)'''
+        print(response)
