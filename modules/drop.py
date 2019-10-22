@@ -39,6 +39,6 @@ class DropManager(object):
             'ship' : str(p),
             'PASS' : password
         }
-        response = r.get('https://azurlanekurutsukaren.herokuapp.com/savedrop', json=data)
+        response = r.post('https://azurlanekurutsukaren.herokuapp.com/savedrop', json=data)
         '''response = r.post('http://localhost:3000/savedrop', json=data)'''
         print(response)
