@@ -9,11 +9,10 @@ f.write(json)
 f.close()
 '''
 from util.utils import Utils
-import requests as r
 from dotenv import load_dotenv
 load_dotenv()
 import os
-import json
+from pymongo import MongoClient
 
 class DropManager(object):
 
@@ -33,12 +32,19 @@ class DropManager(object):
 
     @staticmethod
     def send_drop(p):
-        password = os.getenv("SEND_PASS")
-        data = {
-            'map' : '34',
-            'ship' : str(p),
-            'PASS' : password
+        client = MongoClient(os.getenv('MONGO_URL'))
+        collection = client['AL']['droprates']
+        
+        dropinfo = {
+            'map': 34,
+            'shipid': p
         }
-        response = r.post('https://azurlanekurutsukaren.herokuapp.com/savedrop', json=data)
-        '''response = r.post('http://localhost:3000/savedrop', json=data)'''
-        print(response)
+        doc = collection.find_one(dropinfo)
+        if doc:
+            count = doc['count']+1
+            values = { '$set': { 'count': count } }
+            collection.update_one(dropinfo, values)
+        else:
+            values = { 'map': 34, 'shipid': p, 'count': 1 }
+            collection.insert_one(values)
+        

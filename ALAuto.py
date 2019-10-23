@@ -16,7 +16,7 @@ from util.utils import Utils, Region
 
 from modules.drop import DropManager as DM
 
-DM.send_drop(225)
+DM.send_drop(5)
 sys.exit()
 
 class ALAuto(object):
