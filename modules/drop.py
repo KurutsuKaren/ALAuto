@@ -32,7 +32,7 @@ class DropManager(object):
 
     @staticmethod
     def send_drop(p):
-        client = MongoClient(os.getenv('MONGO_URL'))
+        client = MongoClient(os.getenv('MONGODB_URI'))
         collection = client['AL']['droprates']
         
         dropinfo = {
