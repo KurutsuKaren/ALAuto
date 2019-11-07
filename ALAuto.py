@@ -60,8 +60,10 @@ class ALAuto(object):
     def should_sortie(self):
         """Method to check wether bot should combat or not.
         """
-        return script.next_combat != 0 and script.next_combat < datetime.now() and \
-            Utils.check_oil(self.config.combat['oil_limit'])
+        return self.modules['combat'] \
+            and script.next_combat != 0 \
+            and script.next_combat < datetime.now() \
+            and Utils.check_oil(self.config.combat['oil_limit'])
 
     def run_sortie_cycle(self):
         """Method to run all cycles related to combat.
@@ -167,7 +169,7 @@ Adb.service = config.network['service']
 Adb.device = '-d' if (Adb.service == 'PHONE') else '-e'
 adb = Adb()
 if adb.init():
-    Logger.log_msg('Sucessfully connected to the service.')
+    Logger.log_msg('Successfully connected to the service.')
 else:
     Logger.log_error('Unable to connect to the service.')
     sys.exit()

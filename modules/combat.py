@@ -87,7 +87,7 @@ class CombatModule(object):
                 Logger.log_debug("Disabling hard mode.")
                 Utils.touch_randomly(Region(88, 990, 80, 40))
                 Utils.wait_update_screen(1)
-            if Utils.find_and_touch('maps/map_{}'.format(self.chapter_map), 0.99):
+            if Utils.find_and_touch('maps/map_{}'.format(self.chapter_map), 0.8):
                 Logger.log_msg("Found specified map.")
                 continue
             else:
@@ -195,6 +195,9 @@ class CombatModule(object):
                 Utils.script_sleep(3)
                 Utils.touch_randomly(self.region["hide_strat_menu"])
                 return
+            if Utils.find("combat/commander"):
+                Utils.touch_randomly(self.region["combat_end_confirm"])
+                continue
 
     def movement_handler(self, target_info):
         """
