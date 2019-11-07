@@ -14,11 +14,6 @@ from util.logger import Logger
 from util.stats import Stats
 from util.utils import Utils, Region
 
-from modules.drop import DropManager as DM
-
-DM.send_drop(5)
-sys.exit()
-
 class ALAuto(object):
     modules = {
         'updates': None,

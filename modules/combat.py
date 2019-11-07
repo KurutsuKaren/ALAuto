@@ -165,10 +165,10 @@ class CombatModule(object):
                 Utils.touch_randomly(Region(661, 840, 598, 203))
                 continue
             if Utils.find("menu/item_found"):
-                if boss:
+                '''if boss:
                     id = DM.find_droped()
                     print(id)
-
+                '''
                 Utils.touch_randomly(Region(661, 840, 598, 203))
                 Utils.script_sleep(1)
                 continue
